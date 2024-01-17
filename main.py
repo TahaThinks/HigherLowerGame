@@ -6,37 +6,45 @@ import os
 # print(logo)
 
 gameActive = True
+first_comparison = random.choice(data)
+score = -1
+
+def show_data (name, desription, country, letter):
+    print(f"Compare {letter}: {name}, a {desription}, from {country}.")
 
 
-
-def HigherOrLower(first_count, second_count):
+def HigherOrLower(first_data, second_data):
+    first_count = first_data['follower_count']
+    second_count = second_data['follower_count']
     choice = input("Who has more followers? Type 'A' or 'B': ")
     if choice == "A" and first_count>second_count:
         print("You are Right")
         return True
     elif choice == "B" and first_count<second_count:
         print("You are Right")
+        global first_comparison 
+        first_comparison = second_comparison
         return True
     else:
-        print("You are Wrong")
         return False
 
 
 while gameActive:
-    first_comparison = random.choice(data)
+    score += 1 
     second_comparison = random.choice(data)
     print(first_comparison)
     print(second_comparison)
 
-    print(f"Compare A: {first_comparison['name']}, a {first_comparison['description']}, from {first_comparison['country']}.")
+    show_data(first_comparison['name'],first_comparison['description'],first_comparison['country'],"A")
     print(vs)
-    print(f"Compare B: {second_comparison['name']}, a {second_comparison['description']}, from {second_comparison['country']}.")
-    gameActive = HigherOrLower(first_comparison['follower_count'], second_comparison['follower_count'])
+    show_data(second_comparison['name'],second_comparison['description'],second_comparison['country'],"B")
+
+    gameActive = HigherOrLower(first_comparison, second_comparison)
     os.system('cls')
 
 
 
-print("This is the End")
+print(f"You Lost, Your Socre is {score}")
 
 
 
