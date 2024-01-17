@@ -9,8 +9,11 @@ gameActive = True
 first_comparison = random.choice(data)
 score = -1
 
-def show_data (name, desription, country, letter):
-    print(f"Compare {letter}: {name}, a {desription}, from {country}.")
+def show_data (data, letter):
+    name = data["name"]
+    description = data["description"]
+    country = data["country"]
+    print(f"Compare {letter}: {name}, a {description}, from {country}.")
 
 
 def HigherOrLower(first_data, second_data):
@@ -32,12 +35,14 @@ def HigherOrLower(first_data, second_data):
 while gameActive:
     score += 1 
     second_comparison = random.choice(data)
+    if second_comparison == first_comparison:
+        second_comparison = random.choice(data)
     print(first_comparison)
     print(second_comparison)
 
-    show_data(first_comparison['name'],first_comparison['description'],first_comparison['country'],"A")
+    show_data(first_comparison,"A")
     print(vs)
-    show_data(second_comparison['name'],second_comparison['description'],second_comparison['country'],"B")
+    show_data(second_comparison,"B")
 
     gameActive = HigherOrLower(first_comparison, second_comparison)
     os.system('cls')
